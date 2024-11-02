@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import axios from 'axios';
 
 @Injectable()
 export class ApiProxyService {
+  private readonly logger = new Logger(ApiProxyService.name);
   async getFilms(page: number, search: string): Promise<Film[]> {
     const response = await axios.get(
       `${process.env.API_URL}/films/?search=${search}&page=${page}`,
@@ -19,6 +20,7 @@ export class ApiProxyService {
     const response = await axios.get(
       `${process.env.API_URL}/species/?search=${search}&page=${page}`,
     );
+    this.logger.debug('API Response');
     return response.data;
   }
 

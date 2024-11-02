@@ -1,8 +1,7 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { ApiProxyModule } from './api-proxy/api-proxy.module';
 import { ConfigModule } from '@nestjs/config';
-import { CacheInterceptor, CacheModule } from '@nestjs/cache-manager';
-import { APP_INTERCEPTOR } from '@nestjs/core';
+import { CacheModule } from '@nestjs/cache-manager';
 import * as redisStore from 'cache-manager-redis-store';
 
 @Module({})
@@ -22,12 +21,7 @@ export class AppModule {
         }),
       ],
       controllers: [],
-      providers: [
-        {
-          provide: APP_INTERCEPTOR,
-          useClass: CacheInterceptor,
-        },
-      ],
+      providers: [],
     };
   }
 }
